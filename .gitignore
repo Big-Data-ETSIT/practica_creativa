@@ -3,7 +3,8 @@
 mongodb
 spark
 hadoop
-data
+data/*.bz2
+data/*.jsonl
 mongo-hadoop
 lib/mongo*
 lib/pymongo_spark.py
