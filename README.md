@@ -6,11 +6,6 @@ This is also the code for the [Realtime Predictive Analytics](http://datasyndrom
 
 Have problems? Please file an issue!
 
-## Data Syndrome
-
-Like my work? I am Principal Consultant at [Data Syndrome](http://datasyndrome.com), a consultancy offering assistance and training with building full-stack analytics products, applications and systems. Find us on the web at [datasyndrome.com](http://datasyndrome.com).
-
-![Data Syndrome Logo](images/data_syndrome_logo.png)
 
 ## Realtime Predictive Analytics Course
 
@@ -19,107 +14,6 @@ There is now a video course using code from chapter 8, [Realtime Predictive Anal
 A free preview of the course is available at [https://vimeo.com/202336113](https://vimeo.com/202336113)
 
 [<img src="images/video_course_cover.png">](http://datasyndrome.com/video)
-
-## Installation
-
-There are two methods of installation: Vagrant/Virtualbox or Amazon EC2.
-
-### Amazon EC2
-
-Amazon EC2 is the preferred environment for this book/course, because it is simple and painless. Installation takes just a few moments using Amazon EC2. 
-
-First you will need to install the Amazon CLI via:
-
-```
-pip install awscli
-```
-
-Now you must authenticate into the AWS CLI via (see [Set up AWS Credentials and Region for Development](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) or below):
-
-```
-aws configure
-```
-
-Provide it your AWS credentials consisting of your access key ID/secret access key (available from AWS Dashboard at: user name dropdown (Ex. Russell Jurney)-> [My Security Credentials](https://console.aws.amazon.com/iam/home#/security_credentials)->Access keys), a default [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html) (for example, 'us-west-2' or 'us-east-1') and the 'json' output format. 
-
-Now run the following command to bring up a machine pre-configured with the book's complete environment and source code:
-
-```
-./ec2.sh
-```
-
-#### How it Works
-
-The script [ec2.sh](ec2.sh) uses the file [aws/ec2_bootstrap.sh](aws/ec2_bootstrap.sh) as `--user-data` to boot a single r3.xlarge EC2 instance in the us-east-1 region with all dependencies installed and running. 
-
-In addition, it uses the AWS CLI to create a key-pair called `agile_data_science` (which then appears in this directory under [agile_data_science.pem](agile_data_science.pem)). It also creates a security group called `agile_data_science` with port 22 open only to your external IP address.
-
-Note: this script uses the utility [`jq`](https://stedolan.github.io/jq/) to parse the JSON returned by the AWS CLI. The script will detect whether `jq` is installed and will attempt to use the script [jq_install.sh](jq_install.sh) to install it locally if it is not present. If the install fails, you will be instructed to install it yourself.
-
-#### Next Steps
-
-When it succeeds, the ec2 script will print instructions on what to do next: how to ssh into the ec2 instance, and how to create an ssh tunnel to forward web applications run on the ec2 instance to your local port 5000 where you can view them at [http://localhost:5000](http://localhost:5000).
-
-The script to create an ssh tunnel is [ec2_create_tunnel.sh](ec2_create_tunnel.sh).
-
-Now jump ahead to "Downloading Data".
-
-### Vagrant/Virtualbox Install
-
-Installation takes a few minutes, using Vagrant and Virtualbox. 
-
-**Note: Vagrant/Virtualbox method requires 9GB free RAM, which will mean closing most programs on a 16GB Macbook Pro. If you don't close most everything, you will run out of RAM and your system will crash. Use the EC2 method if this is a problem for you.**
-
-```
-vagrant box update
-vagrant up
-vagrant ssh
-```
-
-Now jump ahead to Downloading Data.
-
-### Manual Install
-
-For a manual install read Appendix A for further setup instructions. Checkout [manual_install.sh](manual_install.sh) if you want to install the tools yourself and run the example code. 
-
-Note: You must READ THE MANUAL INSTALL SCRIPT BEFORE RUNNING IT. It does things to your `~/.bash_profile` that you should know about. Again, this is not recommended for beginners.
-
-Note: You must have Java installed on your computer for these instructions to work. You can find more information about how to install Java here: [https://www.java.com/en/download/help/download_options.xml](https://www.java.com/en/download/help/download_options.xml)
-
-## Downloading Data
-
-Once the server comes up, download the data and you are ready to go. First change directory into the `Agile_Data_Code_2` directory.
-
-```
-cd Agile_Data_Code_2
-```
-Now download the data, depending on which activity this is for.
-
-For the book Agile Data Science 2.0, run: 
-
-```
-./download.sh
-```
-
-For the [Introduction to PySpark](http://datasyndrome.com/training) course, run:
-
-```
-./intro_download.sh
-```
-
-For the [Realtime Predictive Analytics](http://datasyndrome.com/video) video course, or to skip ahead to chapter 8 in the book, run: 
-
-```
-ch08/download_data.sh
-```
-
-## Running Examples
-
-All scripts run from the base directory, except the web app which runs in ex. `ch08/web/`.
-
-### Jupyter Notebooks
-
-All notebooks assume you have run the jupyter notebook command from the project root directory `Agile_Data_Code_2`. If you are using a virtual machine image (Vagrant/Virtualbox or EC2), jupyter notebook is already running. See directions on port mapping to proceed.
 
 # The Data Value Pyramid
 
@@ -168,3 +62,132 @@ We demonstrate summarizing an entity with an airplane fleet page which describes
 We create an entire realtime predictive system with a web front-end to submit prediction requests.
 
 ![Predicting Flight Delays UI](images/predicting_flight_kafka_waiting.png)
+
+## Downloading Data
+
+Once the server comes up, download the data and you are ready to go. First change directory into the `practica_big_data_2019` directory.
+
+```
+cd practica_big_data_2019
+```
+Now download the data.
+
+For the [Realtime Predictive Analytics](http://datasyndrome.com/video)  run: 
+
+```
+resources/download_data.sh
+```
+## Installation
+
+You need to install each component included in the architecture. 
+The following list includes some links with the installation procedure for each component:
+
+ - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk_1.8)
+ - [Pyhton3](https://realpython.com/installing-python/) 
+ - [PIP](https://pip.pypa.io/en/stable/installing/)
+ - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
+ - [MongoDB](https://docs.mongodb.com/manual/installation/)
+ - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 2.4.4)
+ - [Zookeeper](https://zookeeper.apache.org/releases.html)
+ - [Kafka](https://kafka.apache.org/quickstart) (Suggested version kafka_2.12-2.3.0)
+ 
+ ### Install python libraries
+ 
+ ```
+  pip install requirements.txt
+ ```
+ ### Start Zookeeper
+ 
+ Open a console and go to the downloaded Zookeeper directory and run:
+ 
+ ```
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+  ```
+  ### Start Kafka
+  
+  Open a console and go to the downloaded Kafka directory and run:
+  
+  ```
+    bin/kafka-server-start.sh config/server.properties
+   ```
+   open a new console in teh same directory and create a new topic :
+  ```
+      bin/kafka-topics.sh \
+          --create \
+          --zookeeper localhost:2181 \
+          --replication-factor 1 \
+          --partitions 1 \
+          --topic flight_delay_classification_request
+   ```
+   You should see the following message:
+  ```
+    Created topic "flight_delay_classification_request".
+  ```
+  You can see the topic we created with the list topics command:
+  ```
+      bin/kafka-topics.sh --list --zookeeper localhost:2181
+  ```
+  Output:
+  ```
+    flight_delay_classification_request
+  ```
+  (Optional) You can oen a new console with a consumer in order to see the messeges sent to that topic
+  ```
+  bin/kafka-console-consumer.sh \
+      --bootstrap-server localhost:9092 \
+      --topic flight_delay_classification_request \
+      --from-beginning
+  ```
+  ##Train and Save de the model with PySpark mllib
+  In a console go to the base directory of the cloned repo, then go to the `resources` directory
+  ```
+    cd practica_big_data_2019/resources/
+  ```
+  Now, execute the script `train_spark_mllib_model.py`
+  ```
+      python3 train_spark_mllib_model.py
+  ```
+  As result, some files will be saved in the `models` folder 
+  
+  ```
+  ls ../models
+  
+  ```   
+  ## Run Flight Predictor
+  First, you need to change the base_paht val in the MakePrediction scala class,
+  change that val for the path where you clone repo is placed:
+  ```
+    val base_path= "/home/user/Desktop/practica_big_data_2019"
+    
+  ``` 
+  Then run the code using Intellij or spark submit with thier respective arguments.
+  
+  
+  ## Start the prediction request Web Application
+  
+  Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
+  ```
+  cd practica_big_data_2019/resources/web
+  python3 predict_flask.py
+  
+  ```
+  Now, visit http://localhost:5000/flights/delays/predict_kafka and, for fun, open the JavaScript console. Enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at /flights/delays/predict/classify_realtime/response/.
+  
+  Quickly switch windows to your Spark console. Within 10 seconds, the length we’ve configured of a minibatch, you should see something like the following:
+  
+  ## Check the predictions records inserted in MongoDB
+  ```
+   $ mongo
+   > use use agile_data_science;
+   >db.flight_delay_classification_response.find();
+  
+  ```
+  You must have a similar output as:
+  
+  ```
+  { "_id" : ObjectId("5d8dcb105e8b5622696d6f2e"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 290, "Timestamp" : ISODate("2019-09-27T08:40:48.175Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "8e90da7e-63f5-45f9-8f3d-7d948120e5a2", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
+  { "_id" : ObjectId("5d8dcba85e8b562d1d0f9cb8"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 291, "Timestamp" : ISODate("2019-09-27T08:43:20.222Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "d3e44ea5-d42c-4874-b5f7-e8a62b006176", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
+  { "_id" : ObjectId("5d8dcbe05e8b562d1d0f9cba"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 5, "Timestamp" : ISODate("2019-09-27T08:44:16.432Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "a153dfb1-172d-4232-819c-8f3687af8600", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 1 }
+
+
+```
