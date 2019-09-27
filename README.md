@@ -45,129 +45,136 @@ We create an entire realtime predictive system with a web front-end to submit pr
 
 ![Predicting Flight Delays UI](images/predicting_flight_kafka_waiting.png)
 
-## Downloading Data
-
-Once the server comes up, download the data and you are ready to go. First change directory into the `practica_big_data_2019` directory.
+# Setting up the scenario
+## Downloading the code
+First, clone this repository by running the following command:
 
 ```
+git clone https://github.com/ging/practica_big_data_2019
 cd practica_big_data_2019
 ```
-Now download the data.
 
-For the [Realtime Predictive Analytics](http://datasyndrome.com/video)  run: 
+## Downloading Data
+
+Now it is time to download the flight historical data:
 
 ```
 resources/download_data.sh
 ```
 ## Installation
 
-You need to install each component included in the architecture. 
-The following list includes some links with the installation procedure for each component:
+It is necessary to install quite a few dependencies in order to run all the components in the architecture. 
+The following list includes some links to the installation procedure for each component:
 
- - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk_1.8)
+ - [IntelliJ](https://www.jetbrains.com/help/idea/installation-guide.html) (:warning: Be sure to add Java JDK 1.8)
  - [Pyhton3](https://realpython.com/installing-python/) 
- - [PIP](https://pip.pypa.io/en/stable/installing/)
- - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
+ - [pip](https://pip.pypa.io/en/stable/installing/)
+ - [sbt](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/)
- - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 2.4.4)
- - [Zookeeper](https://zookeeper.apache.org/releases.html)
- - [Kafka](https://kafka.apache.org/quickstart) (Suggested version kafka_2.12-2.3.0)
- 
- ### Install python libraries
- 
- ```
-  pip install requirements.txt
- ```
- ### Start Zookeeper
- 
- Open a console and go to the downloaded Zookeeper directory and run:
- 
- ```
-   bin/zookeeper-server-start.sh config/zookeeper.properties
-  ```
-  ### Start Kafka
-  
-  Open a console and go to the downloaded Kafka directory and run:
-  
-  ```
-    bin/kafka-server-start.sh config/server.properties
-   ```
-   open a new console in teh same directory and create a new topic :
-  ```
-      bin/kafka-topics.sh \
-          --create \
-          --zookeeper localhost:2181 \
-          --replication-factor 1 \
-          --partitions 1 \
-          --topic flight_delay_classification_request
-   ```
-   You should see the following message:
-  ```
-    Created topic "flight_delay_classification_request".
-  ```
-  You can see the topic we created with the list topics command:
-  ```
-      bin/kafka-topics.sh --list --zookeeper localhost:2181
-  ```
-  Output:
-  ```
-    flight_delay_classification_request
-  ```
-  (Optional) You can oen a new console with a consumer in order to see the messeges sent to that topic
-  ```
-  bin/kafka-console-consumer.sh \
-      --bootstrap-server localhost:9092 \
-      --topic flight_delay_classification_request \
-      --from-beginning
-  ```
-  ##Train and Save de the model with PySpark mllib
-  In a console go to the base directory of the cloned repo, then go to the `resources` directory
-  ```
-    cd practica_big_data_2019/resources/
-  ```
-  Now, execute the script `train_spark_mllib_model.py`
-  ```
-      python3 train_spark_mllib_model.py
-  ```
-  As result, some files will be saved in the `models` folder 
-  
-  ```
-  ls ../models
-  
-  ```   
-  ## Run Flight Predictor
-  First, you need to change the base_paht val in the MakePrediction scala class,
-  change that val for the path where you clone repo is placed:
-  ```
-    val base_path= "/home/user/Desktop/practica_big_data_2019"
-    
-  ``` 
-  Then run the code using Intellij or spark submit with thier respective arguments.
-  
-  
-  ## Start the prediction request Web Application
-  
-  Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
-  ```
-  cd practica_big_data_2019/resources/web
-  python3 predict_flask.py
-  
-  ```
-  Now, visit http://localhost:5000/flights/delays/predict_kafka and, for fun, open the JavaScript console. Enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at /flights/delays/predict/classify_realtime/response/.
-  
-  Quickly switch windows to your Spark console. Within 10 seconds, the length we’ve configured of a minibatch, you should see something like the following:
-  
-  ## Check the predictions records inserted in MongoDB
-  ```
-   $ mongo
-   > use use agile_data_science;
-   >db.flight_delay_classification_response.find();
+ - [Apacha Spark](https://spark.apache.org/docs/latest/) (Suggested version 2.4.4)
+ - [Apacha Zookeeper](https://zookeeper.apache.org/releases.html)
+ - [Apacha Kafka](https://kafka.apache.org/quickstart) (Suggested version kafka_2.12-2.3.0)
+
+### Install python dependencies
+
+```
+pip install requirements.txt
+```
+### Start Zookeeper
+
+Open a console and go to the directory where you downloaded Zookeeper and run:
+
+```
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+### Start Kafka
+
+Open a console and go to the directory where you downloaded Kafka and run:
+
+```
+bin/kafka-server-start.sh config/server.properties
+```
+
+Open a new console in the same directory and create a new Kafka topic :
+```
+bin/kafka-topics.sh \
+    --create \
+   --zookeeper localhost:2181 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic flight_delay_classification_request
+```
+You should see the following message:
+```
+Created topic "flight_delay_classification_request".
+```
+
+You can see the topic we created with the `list topics` command:
+```
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+```
+Output:
+```
+flight_delay_classification_request
+```
+(Optional) You can open a new console with a consumer in order to see the messages sent to that topic
+```
+bin/kafka-console-consumer.sh \
+   --bootstrap-server localhost:9092 \
+   --topic flight_delay_classification_request \
+   --from-beginning
+```
+
+## Train and Save de the model with PySpark mllib
+Now it is time to train the prediction model with the historical data. In a terminal, go to the base directory of the cloned repo, then access to the `resources` directory
+
+```
+cd practica_big_data_2019/resources/
+```
+
+Now, execute the script `train_spark_mllib_model.py`, which will perform all the training process for us. If you inspect the code, you will see that it reads the data we downloaded in the `data` folder and creates a model using the RandomForestClassifier algorithm from Spark.
+
+```
+python3 train_spark_mllib_model.py
+```
+
+As result of executing the script, the trained model will be saved in the `models` folder 
+
+```
+ls ../models
+```   
+## Run Flight Predictor
+The flight predictor job will receive flight information through Kafka and, using Spark Streaming and the model we created, will make a prediction for the delay of said flight.
+You need to modify the `base_path` variable in the MakePrediction scala class (`/flight_prediction/src/main/scala/es/upm/dit/ging/predictor/MakePrediction.scala`) with the path of the directory where you have cloned the repository:
+```
+val base_path = "/home/student/practica_big_data_2019"
+``` 
+Then run the code using IntelliJ or Spark Submit. The latter needs some [extra configuration](https://spark.apache.org/docs/latest/submitting-applications.html).
+
+
+## Start the prediction request Web Application
+
+Go to the `web` directory under `resources` and execute the Flask web application file `predict_flask.py`:
+```
+cd practica_big_data_2019/resources/web
+python3 predict_flask.py
   
   ```
-  You must have a similar output as:
+Now, visit http://localhost:5000/flights/delays/predict_kafka and, for fun, open the JavaScript console. Enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at /flights/delays/predict/classify_realtime/response/.
   
-  ```
-  { "_id" : ObjectId("5d8dcb105e8b5622696d6f2e"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 290, "Timestamp" : ISODate("2019-09-27T08:40:48.175Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "8e90da7e-63f5-45f9-8f3d-7d948120e5a2", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
+Quickly switch windows to your Spark console. Within 10 seconds, the length we’ve configured of a minibatch, you should see something like the following:
+  
+## Check the predictions records inserted in MongoDB
+```
+$ mongo
+> use use agile_data_science;
+>db.flight_delay_classification_response.find();
+
+```
+You must have a similar output as:
+
+```
+{ "_id" : ObjectId("5d8dcb105e8b5622696d6f2e"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 290, "Timestamp" : ISODate("2019-09-27T08:40:48.175Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "8e90da7e-63f5-45f9-8f3d-7d948120e5a2", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
   { "_id" : ObjectId("5d8dcba85e8b562d1d0f9cb8"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 291, "Timestamp" : ISODate("2019-09-27T08:43:20.222Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "d3e44ea5-d42c-4874-b5f7-e8a62b006176", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
   { "_id" : ObjectId("5d8dcbe05e8b562d1d0f9cba"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 5, "Timestamp" : ISODate("2019-09-27T08:44:16.432Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "a153dfb1-172d-4232-819c-8f3687af8600", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 1 }
 
