@@ -1,25 +1,7 @@
-# Agile_Data_Code_2
+# Práctica de Big Data 2019 MUIT/MUIRST
 
-Code for [Agile Data Science 2.0](http://shop.oreilly.com/product/0636920051619.do), O'Reilly 2017. Now available at the [O'Reilly Store](http://shop.oreilly.com/product/0636920051619.do), on [Amazon](https://www.amazon.com/Agile-Data-Science-2-0-Applications/dp/1491960116) (in Paperback and Kindle) and on [O'Reilly Safari](https://www.safaribooksonline.com/library/view/agile-data-science/9781491960103/). Also available anywhere technical books are sold!
-
-This is also the code for the [Realtime Predictive Analytics](http://datasyndrome.com/video) video course and [Introduction to PySpark](http://datasyndrome.com/training) live course!
-
-Have problems? Please file an issue!
-
-
-## Realtime Predictive Analytics Course
-
-There is now a video course using code from chapter 8, [Realtime Predictive Analytics with Kafka, PySpark, Spark MLlib and Spark Streaming](http://datasyndrome.com/video). Check it out now at [datasyndrome.com/video](http://datasyndrome.com/video).
-
-A free preview of the course is available at [https://vimeo.com/202336113](https://vimeo.com/202336113)
-
-[<img src="images/video_course_cover.png">](http://datasyndrome.com/video)
-
-# The Data Value Pyramid
-
-Originally by Pete Warden, the data value pyramid is how the book is organized and structured. We climb it as we go forward each chapter.
-
-![Data Value Pyramid](images/climbing_the_pyramid_chapter_intro.png)
+The files and instructions for this lab were mainly extracted from the book [Agile Data Science 2.0](http://shop.oreilly.com/product/0636920051619.do), O'Reilly 2017. Now available at the [O'Reilly Store](http://shop.oreilly.com/product/0636920051619.do), on [Amazon](https://www.amazon.com/Agile-Data-Science-2-0-Applications/dp/1491960116) (in Paperback and Kindle) and on [O'Reilly Safari](https://www.safaribooksonline.com/library/view/agile-data-science/9781491960103/).
+The original code is hosted at [this repository](https://github.com/rjurney/Agile_Data_Code_2)
 
 # System Architecture
 
