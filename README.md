@@ -1,7 +1,7 @@
 # Práctica de Big Data 2019 MUIT/MUIRST
 
 The files and instructions for this lab were mainly extracted from the book [Agile Data Science 2.0](http://shop.oreilly.com/product/0636920051619.do), O'Reilly 2017. Now available at the [O'Reilly Store](http://shop.oreilly.com/product/0636920051619.do), on [Amazon](https://www.amazon.com/Agile-Data-Science-2-0-Applications/dp/1491960116) (in Paperback and Kindle) and on [O'Reilly Safari](https://www.safaribooksonline.com/library/view/agile-data-science/9781491960103/).
-The original code is hosted at [this repository](https://github.com/rjurney/Agile_Data_Code_2)
+The original code is hosted in [this repository](https://github.com/rjurney/Agile_Data_Code_2)
 
 # System Architecture
 
@@ -144,25 +144,24 @@ As result of executing the script, the trained model will be saved in the `model
 ls ../models
 ```   
 ## Run Flight Predictor
-The flight predictor job will receive flight information through Kafka and, using Spark Streaming and the model we created, will make a prediction for the delay of said flight.
-You need to modify the `base_path` variable in the MakePrediction scala class (`/flight_prediction/src/main/scala/es/upm/dit/ging/predictor/MakePrediction.scala`) with the path of the directory where you have cloned the repository:
+The flight predictor job will receive flight information through Kafka and, using Spark Streaming and the model we created, will make a prediction for the delay of said flight. You need to modify the `base_path` variable in the MakePrediction scala class (`/flight_prediction/src/main/scala/es/upm/dit/ging/predictor/MakePrediction.scala`) with the path of the directory where you have cloned the repository:
 ```
 val base_path = "/home/student/practica_big_data_2019"
 ``` 
-Then run the code using IntelliJ or Spark Submit. The latter needs some [extra configuration](https://spark.apache.org/docs/latest/submitting-applications.html).
+Then run this class using IntelliJ or Spark Submit. The latter needs some [extra configuration](https://spark.apache.org/docs/latest/submitting-applications.html). Examine the code and try to understand what is going on.
 
 
 ## Start the prediction request Web Application
 
-Go to the `web` directory under `resources` and execute the Flask web application file `predict_flask.py`:
+In order to start the web application you need to access the `web` directory under `resources` and execute the Flask web application file `predict_flask.py`:
 ```
-cd practica_big_data_2019/resources/web
+cd resources/web
 python3 predict_flask.py
   
   ```
-Now, visit http://localhost:5000/flights/delays/predict_kafka and, for fun, open the JavaScript console. Enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at /flights/delays/predict/classify_realtime/response/.
+Now, visit `http://localhost:5000/flights/delays/predict_kafka` and open the JavaScript console. Using the web form provided, enter a nonzero departure delay, an ISO-formatted date (I used 2016-12-25, which was in the future at the time I was writing this), a valid carrier code (use AA or DL if you don’t know one), an origin and destination (my favorite is ATL → SFO), and a valid flight number (e.g., 1519), and hit Submit. Watch the debug output in the JavaScript console as the client polls for data from the response endpoint at `/flights/delays/predict/classify_realtime/response/`.
   
-Quickly switch windows to your Spark console. Within 10 seconds, the length we’ve configured of a minibatch, you should see something like the following:
+Quickly switch windows to your Spark console. Within 10 seconds (the length we have configured of a minibatch), you should see the predicted delay in the console, and also on the web interface.
   
 ## Check the predictions records inserted in MongoDB
 ```
@@ -171,7 +170,7 @@ $ mongo
 >db.flight_delay_classification_response.find();
 
 ```
-You must have a similar output as:
+You must have a similar output to the following:
 
 ```
 { "_id" : ObjectId("5d8dcb105e8b5622696d6f2e"), "Origin" : "ATL", "DayOfWeek" : 6, "DayOfYear" : 360, "DayOfMonth" : 25, "Dest" : "SFO", "DepDelay" : 290, "Timestamp" : ISODate("2019-09-27T08:40:48.175Z"), "FlightDate" : ISODate("2016-12-24T23:00:00Z"), "Carrier" : "AA", "UUID" : "8e90da7e-63f5-45f9-8f3d-7d948120e5a2", "Distance" : 2139, "Route" : "ATL-SFO", "Prediction" : 3 }
@@ -180,3 +179,10 @@ You must have a similar output as:
 
 
 ```
+# Next steps
+
+*  Try to use a docker container for each service in the architecture (Spark Master & Slave, Flask, Mongo, Kafka...)
+*  Deploy the whole architecture using `docker-compose`
+*  Deploy the whole architecture using Kubernetes
+*  Deploy the whole architecture on Google Cloud/AWS
+*  Change MongoDB for Cassandra
