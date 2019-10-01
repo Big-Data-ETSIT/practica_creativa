@@ -295,7 +295,7 @@ def delays():
 from sklearn.externals import joblib
 from os import environ
 
-environ["PROJECT_HOME"] = "/home/amunoz/Desktop/Agile_Data_Code_2"
+
 project_home = os.environ["PROJECT_HOME"]
 # vectorizer = joblib.load("{}/models/sklearn_vectorizer.pkl".format(project_home))
 # regressor = joblib.load("{}/models/sklearn_regressor.pkl".format(project_home))

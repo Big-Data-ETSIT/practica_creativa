@@ -2,8 +2,7 @@
 
 import sys, os, re
 from os import environ
-environ["SPARK_HOME"] = "/opt/spark"
-print(os.environ.get('SPARK_HOME'))
+
 # Pass date and base path to main() from airflow
 def main(base_path):
   

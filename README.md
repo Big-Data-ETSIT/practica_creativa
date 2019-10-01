@@ -143,6 +143,10 @@ The following list includes some links with the installation procedure for each 
   ```
     cd practica_big_data_2019
   ```
+  Set the `SPARK_HOME` env variable with teh path of you cloned repository, for example:
+  ```
+    export SPARK_HOME=/opt/spark
+  ```
   Now, execute the script `train_spark_mllib_model.py`
   ```
       python3 resources/train_spark_mllib_model.py
@@ -165,6 +169,10 @@ The following list includes some links with the installation procedure for each 
   
   ## Start the prediction request Web Application
   
+  Set the `PROJECT_HOME` env variable with teh path of you cloned repository, for example:
+   ```
+  export PROJECT_HOME=/home/user/Desktop/practica_big_data_2019
+   ```
   Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
   ```
   cd practica_big_data_2019/resources/web
