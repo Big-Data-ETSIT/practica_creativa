@@ -139,13 +139,13 @@ The following list includes some links with the installation procedure for each 
       --from-beginning
   ```
   ##Train and Save de the model with PySpark mllib
-  In a console go to the base directory of the cloned repo, then go to the `resources` directory
+  In a console go to the base directory of the cloned repo, then go to the `practica_big_data_2019` directory
   ```
-    cd practica_big_data_2019/resources/
+    cd practica_big_data_2019
   ```
   Now, execute the script `train_spark_mllib_model.py`
   ```
-      python3 train_spark_mllib_model.py
+      python3 resources/train_spark_mllib_model.py
   ```
   As result, some files will be saved in the `models` folder 
   
