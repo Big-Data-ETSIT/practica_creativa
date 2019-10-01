@@ -138,6 +138,43 @@ The following list includes some links with the installation procedure for each 
       --topic flight_delay_classification_request \
       --from-beginning
   ```
+  ##Import the distance records to MongoDB
+  Check if you have Mongo up and running:
+  ```
+  service mongod status
+  ```
+  Output:
+  ```
+  mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: 
+     Active: active (running) since Tue 2019-10-01 14:58:53 CEST; 2h 11min ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 7816 (mongod)
+     CGroup: /system.slice/mongod.service
+             └─7816 /usr/bin/mongod --config /etc/mongod.conf
+  
+  oct 01 14:58:53 amunoz systemd[1]: Started MongoDB Database Server.
+  ```
+  Run the import_distances.sh script
+  ```
+  ./resources/import_distances.sh
+  ```
+  Output:
+  ```
+  2019-10-01T17:06:46.957+0200	connected to: mongodb://localhost/
+  2019-10-01T17:06:47.035+0200	4696 document(s) imported successfully. 0 document(s) failed to import.
+  MongoDB shell version v4.2.0
+  connecting to: mongodb://127.0.0.1:27017/agile_data_science?compressors=disabled&gssapiServiceName=mongodb
+  Implicit session: session { "id" : UUID("9bda4bb6-5727-4e91-8855-71db2b818232") }
+  MongoDB server version: 4.2.0
+  {
+  	"createdCollectionAutomatically" : false,
+  	"numIndexesBefore" : 1,
+  	"numIndexesAfter" : 2,
+  	"ok" : 1
+  }
+
+  ```
   ##Train and Save de the model with PySpark mllib
   In a console go to the base directory of the cloned repo, then go to the `practica_big_data_2019` directory
   ```
