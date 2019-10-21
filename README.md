@@ -98,7 +98,7 @@ The following list includes some links with the installation procedure for each 
  ```
  ### Start Zookeeper
  
- Open a console and go to the downloaded Zookeeper directory and run:
+ Open a console and go to the downloaded Kafka directory and run:
  
  ```
    bin/zookeeper-server-start.sh config/zookeeper.properties
