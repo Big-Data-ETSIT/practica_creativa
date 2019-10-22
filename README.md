@@ -186,7 +186,7 @@ The following list includes some links with the installation procedure for each 
   ```
   Now, execute the script `train_spark_mllib_model.py`
   ```
-      python3 resources/train_spark_mllib_model.py
+      python3 resources/train_spark_mllib_model.py .
   ```
   As result, some files will be saved in the `models` folder 
   
