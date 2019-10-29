@@ -347,12 +347,12 @@ def flight_delays_page():
   """Serves flight delay predictions"""
   
   form_config = [
-    {'field': 'DepDelay', 'label': 'Departure Delay'},
-    {'field': 'Carrier'},
-    {'field': 'FlightDate', 'label': 'Date'},
-    {'field': 'Origin'},
-    {'field': 'Dest', 'label': 'Destination'},
-    {'field': 'FlightNum', 'label': 'Flight Number'},
+    {'field': 'DepDelay', 'label': 'Departure Delay', 'value': 5},
+    {'field': 'Carrier', 'value': 'AA'},
+    {'field': 'FlightDate', 'label': 'Date', 'value': '2016-12-25'},
+    {'field': 'Origin', 'value': 'ATL'},
+    {'field': 'Dest', 'label': 'Destination', 'value': 'SFO'},
+    {'field': 'FlightNum', 'label': 'Flight Number', 'value': 1519},
   ]
   
   return render_template('flight_delays_predict.html', form_config=form_config)
@@ -406,12 +406,12 @@ def flight_delays_batch_page():
   """Serves flight delay predictions"""
   
   form_config = [
-    {'field': 'DepDelay', 'label': 'Departure Delay'},
-    {'field': 'Carrier'},
-    {'field': 'FlightDate', 'label': 'Date'},
-    {'field': 'Origin'},
-    {'field': 'Dest', 'label': 'Destination'},
-    {'field': 'FlightNum', 'label': 'Flight Number'},
+    {'field': 'DepDelay', 'label': 'Departure Delay', 'value': 5},
+    {'field': 'Carrier', 'value': 'AA'},
+    {'field': 'FlightDate', 'label': 'Date', 'value': '2016-12-25'},
+    {'field': 'Origin', 'value': 'ATL'},
+    {'field': 'Dest', 'label': 'Destination', 'value': 'SFO'},
+    {'field': 'FlightNum', 'label': 'Flight Number', 'value': 1519},
   ]
   
   return render_template("flight_delays_predict_batch.html", form_config=form_config)
