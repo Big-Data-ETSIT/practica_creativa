@@ -500,11 +500,11 @@ def flight_delays_page_kafka():
   """Serves flight delay prediction page with polling form"""
   
   form_config = [
-    {'field': 'DepDelay', 'label': 'Departure Delay'},
-    {'field': 'Carrier'},
-    {'field': 'FlightDate', 'label': 'Date'},
-    {'field': 'Origin'},
-    {'field': 'Dest', 'label': 'Destination'},
+    {'field': 'DepDelay', 'label': 'Departure Delay', 'value': 5},
+    {'field': 'Carrier', 'value': 'AA'},
+    {'field': 'FlightDate', 'label': 'Date', 'value': '2016-12-25'},
+    {'field': 'Origin', 'value': 'ATL'},
+    {'field': 'Dest', 'label': 'Destination', 'value': 'SFO'}
   ]
   
   return render_template('flight_delays_predict_kafka.html', form_config=form_config)

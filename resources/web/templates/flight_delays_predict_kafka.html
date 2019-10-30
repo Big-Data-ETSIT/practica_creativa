@@ -16,7 +16,11 @@
       {% else %}
         <label for="{{item['field']}}">{{item['field']}}</label>
       {% endif %}
-        <input name="{{item['field']}}" style="width: 36px; margin-right: 10px;" value=""></input>
+        <input name="{{item['field']}}" style="width: 36px; margin-right: 10px;" 
+        {% if 'value' in item %}
+          value="{{item['value']}}"
+        {% endif %}
+        ></input>
     {% endfor %}
     <button type="submit" class="btn btn-xs btn-default" style="height: 25px">Submit</button>
   </form>
