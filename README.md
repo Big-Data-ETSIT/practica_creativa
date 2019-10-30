@@ -138,7 +138,7 @@ The following list includes some links with the installation procedure for each 
       --topic flight_delay_classification_request \
       --from-beginning
   ```
-  ##Import the distance records to MongoDB
+  ## Import the distance records to MongoDB
   Check if you have Mongo up and running:
   ```
   service mongod status
@@ -179,6 +179,10 @@ The following list includes some links with the installation procedure for each 
   In a console go to the base directory of the cloned repo, then go to the `practica_big_data_2019` directory
   ```
     cd practica_big_data_2019
+  ```
+  Set the `JAVA_HOME` env variable with teh path of java instalation directory, for example:
+  ```
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
   ```
   Set the `SPARK_HOME` env variable with teh path of you cloned repository, for example:
   ```
