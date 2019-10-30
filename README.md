@@ -180,7 +180,7 @@ The following list includes some links with the installation procedure for each 
   ```
     cd practica_big_data_2019
   ```
-  Set the `JAVA_HOME` env variable with teh path of java instalation directory, for example:
+  Set the `JAVA_HOME` env variable with teh path of java installation directory, for example:
   ```
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
   ```
