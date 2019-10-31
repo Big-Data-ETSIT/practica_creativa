@@ -2,7 +2,7 @@ name := "flight_prediction"
 
 version := "0.1"
 
-scalaVersion := "2.12.9"
+scalaVersion := "2.11.7"
 
 val sparkVersion = "2.4.4"
 
@@ -18,8 +18,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-mllib" % sparkVersion,
   "org.apache.spark" %% "spark-streaming" % sparkVersion,
   "org.apache.spark" %% "spark-hive" % sparkVersion,
-  "org.apache.spark" % "spark-sql-kafka-0-10_2.12" % sparkVersion,
-  "org.mongodb.spark" %% "mongo-spark-connector" % "2.4.1",
-  "org.mongodb.scala" %% "mongo-scala-bson" % "1.2.0"
+  "org.apache.spark" % "spark-sql-kafka-0-10" % "2.4.0",
+  "org.mongodb.spark" %% "mongo-spark-connector" % "2.4.1"
 
 )
