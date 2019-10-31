@@ -205,8 +205,14 @@ The following list includes some links with the installation procedure for each 
     val base_path= "/home/user/Desktop/practica_big_data_2019"
     
   ``` 
-  Then run the code using Intellij or spark submit with thier respective arguments.
+  Then run the code using Intellij or spark submit with their respective arguments.
   
+In case you will run the predictor using spark submit, you have to add at least these two packages with the --packages option:
+  ```
+  --packages org.mongodb.spark:mongo-spark-connector_2.11:2.3.2,org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
+     
+  ``` 
+   Be carefull with the packages version becouse if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 2.4.0, kafka_2.12-2.3.0 and mongo superior to 2.6
   
   ## Start the prediction request Web Application
   
