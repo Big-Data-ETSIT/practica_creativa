@@ -184,7 +184,7 @@ The following list includes some links with the installation procedure for each 
   ```
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
   ```
-  Set the `SPARK_HOME` env variable with teh path of you cloned repository, for example:
+  Set the `SPARK_HOME` env variable with teh path of your Spark installation folder, for example:
   ```
     export SPARK_HOME=/opt/spark
   ```
