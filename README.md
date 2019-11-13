@@ -205,9 +205,9 @@ The following list includes some links with the installation procedure for each 
     val base_path= "/home/user/Desktop/practica_big_data_2019"
     
   ``` 
-  Then run the code using Intellij or spark submit with their respective arguments.
+  Then run the code using Intellij or spark-submit with their respective arguments. 
   
-In case you will run the predictor using spark submit, you have to add at least these two packages with the --packages option:
+Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
   ```
   --packages org.mongodb.spark:mongo-spark-connector_2.11:2.3.2,org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
      
