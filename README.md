@@ -94,7 +94,7 @@ The following list includes some links with the installation procedure for each 
  ### Install python libraries
  
  ```
-  pip install requirements.txt
+  pip install -r requirements.txt
  ```
  ### Start Zookeeper
  
