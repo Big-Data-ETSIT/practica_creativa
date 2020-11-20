@@ -3,7 +3,6 @@
 mongodb
 spark
 hadoop
-data
 mongo-hadoop
 lib/mongo*
 lib/pymongo_spark.py
