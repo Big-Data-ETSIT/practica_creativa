@@ -6,7 +6,7 @@ scalaVersion := "2.11.7"
 
 val sparkVersion = "2.4.4"
 
-mainClass in Compile := Some("scala.MakePrediction")
+mainClass in Compile := Some("es.upm.dit.ging.predictor.MakePrediction")
 
 resolvers ++= Seq(
   "apache-snapshots" at "https://repository.apache.org/snapshots/"
