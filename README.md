@@ -83,7 +83,7 @@ You need to install each component included in the architecture.
 The following list includes some links with the installation procedure for each component:
 
  - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk_1.8)
- - [Pyhton3](https://realpython.com/installing-python/) 
+ - [Pyhton3](https://realpython.com/installing-python/) (Suggested version 3.7) 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/)
