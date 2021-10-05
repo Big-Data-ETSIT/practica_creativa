@@ -126,7 +126,7 @@ The following list includes some links with the installation procedure for each 
   ```
   You can see the topic we created with the list topics command:
   ```
-      bin/kafka-topics.sh --list --zookeeper localhost:2181
+      bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
   ```
   Output:
   ```
