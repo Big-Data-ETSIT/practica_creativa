@@ -87,7 +87,7 @@ The following list includes some links with the installation procedure for each 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/)
- - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.1.3)
+ - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.1.2)
  - [Scala](https://www.scala-lang.org)(Suggested version 2.12)
  - [Zookeeper](https://zookeeper.apache.org/releases.html)
  - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.0.0)
