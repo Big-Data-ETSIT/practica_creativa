@@ -176,7 +176,7 @@ The following list includes some links with the installation procedure for each 
   }
 
   ```
-  ##Train and Save de the model with PySpark mllib
+  ## Train and Save de the model with PySpark mllib
   In a console go to the base directory of the cloned repo, then go to the `practica_big_data_2019` directory
   ```
     cd practica_big_data_2019
@@ -247,3 +247,54 @@ Please, note that in order to use spark-submit you first need to compile the cod
 
 
 ```
+
+### Train the model with Apache Airflow (optional)
+
+- The version of Apache Airflow used is the 2.1.4 and it is installed with pip. For development it uses SQLite as database but it is not recommended for production. For the laboratory SQLite is sufficient.
+
+- Install python libraries for Apache Airflow (suggested Python 3.7)
+
+```shell
+cd resources/airflow
+pip install -r requirements.txt -c constraints.txt
+```
+- Set the `PROJECT_HOME` env variable with the path of you cloned repository, for example:
+```
+export PROJECT_HOME=/home/user/Desktop/practica_big_data_2019
+```
+- Configure airflow environment
+
+```shell
+export AIRFLOW_HOME=~/airflow
+mkdir $AIRFLOW_HOME/dags
+mkdir $AIRFLOW_HOME/logs
+mkdir $AIRFLOW_HOME/plugins
+
+airflow users create \
+    --username admin \
+    --firstname Jack \
+    --lastname  Sparrow\
+    --role Admin \
+    --email example@mail.org
+```
+- Start airflow scheduler and webserver
+```shell
+airflow webserver --port 8080
+airflow sheduler
+```
+Vistit http://localhost:8080/home for the web version of Apache Airflow.
+
+- The DAG is defined in `resources/airflow/setup.py`.
+- **TODO**: add the DAG and execute it to train the model (see the official documentation of Apache Airflow to learn how to exectue and add a DAG with the airflow command).
+- **TODO**: explain the architecture of apache airflow (see the official documentation of Apache Airflow).
+- **TODO**: analyzing the setup.py: what happens if the task fails?, what is the peridocity of the task?
+
+![Apache Airflow DAG success](images/airflow.jpeg)
+
+
+
+
+
+
+
+
