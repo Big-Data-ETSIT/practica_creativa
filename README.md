@@ -87,9 +87,10 @@ The following list includes some links with the installation procedure for each 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/)
- - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 2.4.4)
+ - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.1.3)
+ - [Scala](https://www.scala-lang.org)(Suggested version 2.12)
  - [Zookeeper](https://zookeeper.apache.org/releases.html)
- - [Kafka](https://kafka.apache.org/quickstart) (Suggested version kafka_2.12-2.3.0)
+ - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.0.0)
  
  ### Install python libraries
  
@@ -113,11 +114,11 @@ The following list includes some links with the installation procedure for each 
    open a new console in teh same directory and create a new topic :
   ```
       bin/kafka-topics.sh \
-          --create \
-          --zookeeper localhost:2181 \
-          --replication-factor 1 \
-          --partitions 1 \
-          --topic flight_delay_classification_request
+        --create \
+        --bootstrap-server localhost:9092 \
+        --replication-factor 1 \
+        --partitions 1 \
+        --topic flight_delay_classification_request
    ```
    You should see the following message:
   ```
@@ -209,7 +210,7 @@ The following list includes some links with the installation procedure for each 
   
 Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
   ```
-  --packages org.mongodb.spark:mongo-spark-connector_2.11:2.3.2,org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
+  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
      
   ``` 
    Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 2.4.0, kafka_2.12-2.3.0 and mongo superior to 2.6
