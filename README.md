@@ -183,7 +183,7 @@ The following list includes some links with the installation procedure for each 
   ```
   Set the `JAVA_HOME` env variable with teh path of java installation directory, for example:
   ```
-    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
   ```
   Set the `SPARK_HOME` env variable with teh path of your Spark installation folder, for example:
   ```
