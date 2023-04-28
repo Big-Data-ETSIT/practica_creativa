@@ -221,7 +221,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
   --packages org.mongodb.spark:mongo-spark-connector_2.12:10.1.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0
      
   ``` 
-   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.1.2, kafka_2.12-3.1.2 and mongo superior to 2.6
+   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.3.0, kafka_2.12-3.4.0 and mongo superior to 2.6
   
   ## Start the prediction request Web Application
   
