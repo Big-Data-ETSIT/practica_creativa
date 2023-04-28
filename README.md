@@ -65,7 +65,7 @@ We create an entire realtime predictive system with a web front-end to submit pr
 
 ## Downloading Data
 
-Once the server comes up, download the data and you are ready to go. First change directory into the `practica_big_data_2019` directory.
+Once the server comes up, download the data and you are ready to go. First change directory into the `practica_creativa` directory.
 
 ```
 cd practica_creativa
