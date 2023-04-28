@@ -1,7 +1,7 @@
 package es.upm.dit.ging.predictor
-
-import com.mongodb.spark.MongoSpark
-import com.mongodb.spark.config.WriteConfig
+import com.mongodb.spark._
+//import com.mongodb.spark.MongoSpark
+//import com.mongodb.spark.config.WriteConfig
 import org.apache.spark.ml.classification.RandomForestClassificationModel
 import org.apache.spark.ml.feature.{Bucketizer, StringIndexerModel, VectorAssembler}
 import org.apache.spark.sql.functions.{concat, from_json, lit}
@@ -21,7 +21,7 @@ object MakePrediction {
     import spark.implicits._
 
     //Load the arrival delay bucketizer
-    val base_path= "/Users/admin/IdeaProjects/ging/practica_big_data_2019"
+    val base_path= "/Users/admin/Downloads/practica_big_data_2019"
     val arrivalBucketizerPath = "%s/models/arrival_bucketizer_2.0.bin".format(base_path)
     print(arrivalBucketizerPath.toString())
     val arrivalBucketizer = Bucketizer.load(arrivalBucketizerPath)
@@ -139,15 +139,34 @@ object MakePrediction {
     finalPredictions.printSchema()
 
     // Define MongoUri for connection
-    val writeConfig = WriteConfig(Map("uri" -> "mongodb://127.0.0.1:27017/agile_data_science.flight_delay_classification_response"))
+    //val writeConfig = WriteConfig(Map("uri" -> "mongodb://127.0.0.1:27017/agile_data_science.flight_delay_classification_response"))
 
     // Store to Mongo each streaming batch
-    val flightRecommendations = finalPredictions.writeStream.foreachBatch {
-      (batchDF: DataFrame, batchId: Long) =>
-        MongoSpark.save(batchDF,writeConfig)
-    }.start()
+    //val flightRecommendations = finalPredictions.writeStream.foreachBatch {
+    //  (batchDF: DataFrame, batchId: Long) =>
+    //    MongoSpark.save(batchDF,writeConfig)
+    //}.start()
 
+    // define a streaming query
+    val dataStreamWriter = finalPredictions
+
+      //spark.readStream
+
+      //.schema(finalPredictions.schema)
+      //.load()
+      // manipulate your streaming data
+      .writeStream
+      .format("mongodb")
+      .option("spark.mongodb.connection.uri", "mongodb://127.0.0.1:27017")
+      .option("spark.mongodb.database", "agile_data_science")
+      .option("checkpointLocation", "/tmp")
+      .option("spark.mongodb.collection", "flight_delay_classification_response")
+      .outputMode("append")
+
+    // run the query
+    val query = dataStreamWriter.start()
     // Console Output for predictions
+
     val consoleOutput = finalPredictions.writeStream
       .outputMode("append")
       .format("console")
