@@ -185,9 +185,9 @@ The following list includes some links with the installation procedure for each 
 
   ```
   ## Train and Save de the model with PySpark mllib
-  In a console go to the base directory of the cloned repo, then go to the `practica_big_data_2019` directory
+  In a console go to the base directory of the cloned repo, then go to the `practica_creativa` directory
   ```
-    cd practica_big_data_2019
+    cd practica_creativa
   ```
   Set the `JAVA_HOME` env variable with teh path of java installation directory, for example:
   ```
