@@ -68,7 +68,7 @@ We create an entire realtime predictive system with a web front-end to submit pr
 Once the server comes up, download the data and you are ready to go. First change directory into the `practica_big_data_2019` directory.
 
 ```
-cd practica_big_data_2019
+cd practica_creativa
 ```
 Now download the data.
 
@@ -211,7 +211,7 @@ The following list includes some links with the installation procedure for each 
   First, you need to change the base_paht val in the MakePrediction scala class,
   change that val for the path where you clone repo is placed:
   ```
-    val base_path= "/home/user/Desktop/practica_big_data_2019"
+    val base_path= "/home/user/Desktop/practica_creativa"
     
   ``` 
   Then run the code using Intellij or spark-submit with their respective arguments. 
@@ -227,7 +227,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
   
   Set the `PROJECT_HOME` env variable with teh path of you cloned repository, for example:
    ```
-  export PROJECT_HOME=/home/user/Desktop/practica_big_data_2019
+  export PROJECT_HOME=/home/user/Desktop/practica_creativa
    ```
   Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
   ```
@@ -268,7 +268,7 @@ pip install -r requirements.txt -c constraints.txt
 ```
 - Set the `PROJECT_HOME` env variable with the path of you cloned repository, for example:
 ```
-export PROJECT_HOME=/home/user/Desktop/practica_big_data_2019
+export PROJECT_HOME=/home/user/Desktop/practica_creativa
 ```
 - Configure airflow environment
 
