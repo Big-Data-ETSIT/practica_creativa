@@ -13,7 +13,7 @@ pymongo
 requests
 scipy
 selenium
-sklearn
+scikit-learn
 tabulate
 tldextract
 wikipedia
