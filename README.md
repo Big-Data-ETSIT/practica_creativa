@@ -214,7 +214,7 @@ The following list includes some links with the installation procedure for each 
     val base_path= "/home/user/Desktop/practica_creativa"
     
   ``` 
-  Then run the code using Intellij or spark-submit with their respective arguments. 
+  Then run the code using Intellij, sbt, or spark-submit with their respective arguments. 
   
 Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
   ```
