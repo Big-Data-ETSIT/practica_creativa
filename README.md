@@ -86,7 +86,7 @@ The following list includes some links with the installation procedure for each 
  - [Pyhton3](https://realpython.com/installing-python/) (Suggested version 3.7) 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
- - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 6.0)
+ - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 6.0, if it fails try with mongo 4.0)
  - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.3.3)
  - [Scala](https://www.scala-lang.org)(Suggested version 2.12.10)
  - [Zookeeper](https://zookeeper.apache.org/releases.html)
