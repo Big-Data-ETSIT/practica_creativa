@@ -87,6 +87,10 @@ The following list includes some links with the installation procedure for each 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 6.0, if it fails try with mongo 4.0)
+   If mongo fails in the VM you can install it directly with docker:
+   ```
+   $ docker run --name mongo -d -p 27017:27017 mongo:6.0 #or mongo:4.0 if mongo 6.0 fails
+   ```
  - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.3.3)
  - [Scala](https://www.scala-lang.org)(Suggested version 2.12.10)
  - [Zookeeper](https://zookeeper.apache.org/releases.html)
@@ -119,7 +123,7 @@ The following list includes some links with the installation procedure for each 
   ```
     bin/kafka-server-start.sh config/server.properties
    ```
-   open a new console in teh same directory and create a new topic :
+   open a new console in the same directory and create a new topic :
   ```
       bin/kafka-topics.sh \
         --create \
@@ -150,9 +154,11 @@ The following list includes some links with the installation procedure for each 
   ## Import the distance records to MongoDB
   Check if you have Mongo up and running:
   ```
-  service mongod status
+  service mongod status # if installed directly
+  docker ps # if installed with docker
+  docker logs mongo # if installed with docker but docker ps does not show mongo
   ```
-  Output:
+  Output (if installed directly):
   ```
   mongod.service - MongoDB Database Server
      Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: 
@@ -164,7 +170,7 @@ The following list includes some links with the installation procedure for each 
   
   oct 01 14:58:53 amunoz systemd[1]: Started MongoDB Database Server.
   ```
-  Run the import_distances.sh script
+  Run the import_distances.sh script. If mongo was installed with docker you have to copy the /data downloaded inside the mongo container and check how to import a .jsonl (import_distances.sh)
   ```
   ./resources/import_distances.sh
   ```
@@ -189,13 +195,14 @@ The following list includes some links with the installation procedure for each 
   ```
     cd practica_creativa
   ```
-  Set the `JAVA_HOME` env variable with teh path of java installation directory, for example:
+  Set the `JAVA_HOME` env variable with the path of java installation directory, for example:
   ```
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
   ```
-  Set the `SPARK_HOME` env variable with teh path of your Spark installation folder, for example:
+  Set the `SPARK_HOME` env variable with the path of your Spark installation folder, for example:
   ```
     export SPARK_HOME=/opt/spark
+    # if installed with sdkman you can get the installation folder with 'whereis spark-submit'
   ```
   Now, execute the script `train_spark_mllib_model.py`
   ```
@@ -225,7 +232,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
   
   ## Start the prediction request Web Application
   
-  Set the `PROJECT_HOME` env variable with teh path of you cloned repository, for example:
+  Set the `PROJECT_HOME` env variable with the path of you cloned repository, for example:
    ```
   export PROJECT_HOME=/home/user/Desktop/practica_creativa
    ```
