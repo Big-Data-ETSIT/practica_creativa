@@ -91,7 +91,7 @@ The following list includes some links with the installation procedure for each 
    ```
    $ docker run --name mongo -d -p 27017:27017 mongo:6.0 #or mongo:4.0 if mongo 6.0 fails
    ```
- - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.3.3)
+ - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 3.3.0)
  - [Scala](https://www.scala-lang.org)(Suggested version 2.12.10)
  - [Zookeeper](https://zookeeper.apache.org/releases.html)
  - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.4.0)
