@@ -21,6 +21,6 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming" % sparkVersion,
   "org.apache.spark" %% "spark-hive" % sparkVersion,
   "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.3.0",
-  "org.mongodb.spark" %% "mongo-spark-connector" % "10.1.1"
+  "org.mongodb.spark" %% "mongo-spark-connector" % "3.0.1"
 
 )
