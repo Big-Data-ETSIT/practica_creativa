@@ -26,7 +26,7 @@ import datetime
 # Setup Kafka
 from kafka import KafkaProducer
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],api_version=(0,10))
-PREDICTION_TOPIC = 'flight_delay_classification_request'
+PREDICTION_TOPIC = 'flight-delay-ml-request'
 
 import uuid
 
@@ -513,7 +513,7 @@ def flight_delays_page_kafka():
 def classify_flight_delays_realtime_response(unique_id):
   """Serves predictions to polling requestors"""
   
-  prediction = client.agile_data_science.flight_delay_classification_response.find_one(
+  prediction = client.agile_data_science.flight_delay_ml_response.find_one(
     {
       "UUID": unique_id
     }

@@ -6,7 +6,7 @@ version := "0.1"
 
 scalaVersion := "2.12.10"
 
-val sparkVersion = "3.3.0"
+val sparkVersion = "3.5.3"
 
 mainClass in Compile := Some("es.upm.dit.ging.predictor.MakePrediction")
 
@@ -20,7 +20,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-mllib" % sparkVersion,
   "org.apache.spark" %% "spark-streaming" % sparkVersion,
   "org.apache.spark" %% "spark-hive" % sparkVersion,
-  "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.3.0",
-  "org.mongodb.spark" %% "mongo-spark-connector" % "3.0.1"
+  "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion,
+  "org.mongodb.spark" %% "mongo-spark-connector" % "10.4.1"
 
 )
