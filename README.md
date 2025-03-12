@@ -191,7 +191,6 @@ The following list includes some links with the installation procedure for each 
   ```
   > [!NOTE]  
   >In case you dont have mongo installed or your are using the laboratory perform the following steps:
-
   >Create a data directory for storing the mongo data inseide of the `practica_creativa` folder:
   >```
   >mkdir data_mongo
@@ -229,11 +228,11 @@ The following list includes some links with the installation procedure for each 
   ```
   > [!NOTE]  
   > You only need to set JAVA_HOME if you haven't done before.
-
-  Set the `JAVA_HOME` env variable with the path of java installation directory, for example:
-  ```
-    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-  ```
+  >Set the `JAVA_HOME` env variable with the path of java installation directory, for example:
+  >```
+  >  export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+  >```
+  
   Set the `SPARK_HOME` env variable with the path of your Spark installation folder, for example:
   ```
     export SPARK_HOME=/opt/spark
