@@ -82,19 +82,19 @@ resources/download_data.sh
 You need to install each component included in the architecture. 
 The following list includes some links with the installation procedure for each component:
 
- - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk_1.8) or VsCode
+ - [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html) (jdk 17) or VsCode
  - [Pyhton3](https://realpython.com/installing-python/) (Suggested version 3.7) 
  - [PIP](https://pip.pypa.io/en/stable/installing/)
+ - [SDKMAN](https://sdkman.io/install/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
- - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 6.0, if it fails try with mongo 4.0)
+ - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 7.0.17, if it fails try with mongo 4.0)
    If mongo fails in the VM you can install it directly with docker:
    ```
-   $ docker run --name mongo -d -p 27017:27017 mongo:6.0 #or mongo:4.0 if mongo 6.0 fails
+   $ docker run --name mongo -d -p 27017:27017 mongo:7.0.17 #or mongo:4.0 if mongo 6.0 fails
    ```
- - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 3.3.0)
+ - [Spark](https://spark.apache.org/docs/latest/) (Suggested version 3.5.3)
  - [Scala](https://www.scala-lang.org)(Suggested version 2.12.10)
- - [Zookeeper](https://zookeeper.apache.org/releases.html)
- - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.4.0)
+ - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.9.0 with KRaft)
 
  ### Create and use Python venv
 
@@ -109,19 +109,38 @@ The following list includes some links with the installation procedure for each 
  ```
   pip install -r requirements.txt
  ```
- ### Start Zookeeper
+ ### Check Java installation
  
- Open a console and go to the downloaded Kafka directory and run:
+ Open a console and use sdk man to check the installation of java:
  
  ```
-   bin/zookeeper-server-start.sh config/zookeeper.properties
-  ```
+   sdk list java
+ ```
+ In case you have other version installed, chage or instal de jdk 17
+ ```
+   sdk install java 17.0.14-amzn
+ ```
+ Check the JAVA_HOME env:
+ ```
+   echo ${JAVA_HOME}
+ ```
+ You should have an output similar to this:
+ ```
+   /Users/admin/.sdkman/candidates/java/current
+ ```
+
   ### Start Kafka
   
   Open a console and go to the downloaded Kafka directory and run:
+  ```
+    KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+  ```
+  ```
+    bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties  
+  ```
   
   ```
-    bin/kafka-server-start.sh config/server.properties
+    bin/kafka-server-start.sh config/kraft/server.properties
    ```
    open a new console in the same directory and create a new topic :
   ```
@@ -130,11 +149,11 @@ The following list includes some links with the installation procedure for each 
         --bootstrap-server localhost:9092 \
         --replication-factor 1 \
         --partitions 1 \
-        --topic flight_delay_classification_request
+        --topic flight-delay-ml-request
    ```
    You should see the following message:
   ```
-    Created topic "flight_delay_classification_request".
+    Created topic "flight-delay-ml-request".
   ```
   You can see the topic we created with the list topics command:
   ```
@@ -142,13 +161,13 @@ The following list includes some links with the installation procedure for each 
   ```
   Output:
   ```
-    flight_delay_classification_request
+    flight-delay-ml-request
   ```
   (Optional) You can oen a new console with a consumer in order to see the messeges sent to that topic
   ```
   bin/kafka-console-consumer.sh \
       --bootstrap-server localhost:9092 \
-      --topic flight_delay_classification_request \
+      --topic flight-delay-ml-request \
       --from-beginning
   ```
   ## Import the distance records to MongoDB
@@ -170,7 +189,20 @@ The following list includes some links with the installation procedure for each 
   
   oct 01 14:58:53 amunoz systemd[1]: Started MongoDB Database Server.
   ```
-  Run the import_distances.sh script. If mongo was installed with docker you have to copy the /data downloaded inside the mongo container and check how to import a .jsonl (import_distances.sh)
+  > [!NOTE]  
+  >In case you dont have mongo installed or your are using the laboratory perform the following steps:
+
+  >Create a data directory for storing the mongo data inseide of the `practica_creativa` folder:
+  >```
+  >mkdir data_mongo
+  >```
+  >Open a terminal and run the mongo daemon for starting the server:
+  >```
+  >mongod —port 27017 —dbpath ./data_mongo —oplogSize 50
+  >```
+  >Don't close the terminar in any moment otherwise teh mongo server will stop.
+
+  In other terminal run the import_distances.sh script. If mongo was installed with docker you have to copy the /data downloaded inside the mongo container and check how to import a .jsonl (import_distances.sh)
   ```
   ./resources/import_distances.sh
   ```
@@ -181,7 +213,7 @@ The following list includes some links with the installation procedure for each 
   MongoDB shell version v4.2.0
   connecting to: mongodb://127.0.0.1:27017/agile_data_science?compressors=disabled&gssapiServiceName=mongodb
   Implicit session: session { "id" : UUID("9bda4bb6-5727-4e91-8855-71db2b818232") }
-  MongoDB server version: 4.2.0
+  MongoDB server version: 7.0.17
   {
   	"createdCollectionAutomatically" : false,
   	"numIndexesBefore" : 1,
@@ -195,6 +227,9 @@ The following list includes some links with the installation procedure for each 
   ```
     cd practica_creativa
   ```
+  > [!NOTE]  
+  > You only need to set JAVA_HOME if you haven't done before.
+
   Set the `JAVA_HOME` env variable with the path of java installation directory, for example:
   ```
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
@@ -225,10 +260,10 @@ The following list includes some links with the installation procedure for each 
   
 Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
   ```
-  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0
+  --packages org.mongodb.spark:mongo-spark-connector_2.12:10.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3
      
   ``` 
-   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.3.0, kafka_2.12-3.4.0 and mongo superior to 2.6
+   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.5.3, kafka_2.12-3.9.0 and mongo superior to 6.0
   
   ## Start the prediction request Web Application
   
@@ -238,7 +273,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
    ```
   Go to the `web` directory under `resources` and execute the flask web application file `predict_flask.py`:
   ```
-  cd practica_big_data_2019/resources/web
+  cd practica_creativa/resources/web
   python3 predict_flask.py
   
   ```
@@ -250,7 +285,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
   ```
    $ mongo
    > use use agile_data_science;
-   >db.flight_delay_classification_response.find();
+   > db.flight_delay_ml_response.find();
   
   ```
   You must have a similar output as:
