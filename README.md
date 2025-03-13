@@ -88,6 +88,7 @@ The following list includes some links with the installation procedure for each 
  - [SDKMAN](https://sdkman.io/install/)
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 7.0.17, if it fails try with mongo 4.0)
+   In the ETSIT labs mongo is alrady installed
    If mongo fails in the VM you can install it directly with docker:
    ```
    $ docker run --name mongo -d -p 27017:27017 mongo:7.0.17 #or mongo:4.0 if mongo 6.0 fails
