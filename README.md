@@ -89,12 +89,13 @@ The following list includes some links with the installation procedure for each 
  - [SBT](https://www.scala-sbt.org/release/docs/Setup.html) 
  - [MongoDB](https://docs.mongodb.com/manual/installation/) (Suggested version 7.0.17, if it fails try with mongo 4.0)
    In the ETSIT labs mongo is alrady installed
-   If mongo fails in the VM you can install it directly with docker:
+   
+   Although you can install it directly with docker:
    ```
    $ docker run --name mongo -d -p 27017:27017 mongo:7.0.17 #or mongo:4.0 if mongo 6.0 fails
    ```
- - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.5.3)
- - [Scala](https://www.scala-lang.org)(Mandatory version 2.12.10)
+ - [Spark](https://spark.apache.org/docs/latest/) (Mandatory version 3.5.3 -> you can install it with sdkman)
+ - [Scala](https://www.scala-lang.org)(Mandatory version 2.12.10 -> you can install it with sdkman)
  - [Kafka](https://kafka.apache.org/quickstart) (Mandatory version kafka_2.12-3.9.0 with KRaft)
 
  ### Create and use Python venv
@@ -191,7 +192,7 @@ The following list includes some links with the installation procedure for each 
   oct 01 14:58:53 amunoz systemd[1]: Started MongoDB Database Server.
   ```
   > [!NOTE]  
-  >In case you dont have mongo installed or your are using the laboratory perform the following steps:
+  >In case you don't have run mongo with docker and is the first time you install monog or your are using the laboratory perform the following steps:
   >Create a data directory for storing the mongo data inseide of the `practica_creativa` folder:
   >```
   >mkdir data_mongo
