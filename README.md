@@ -299,7 +299,7 @@ Please, note that in order to use spark-submit you first need to compile the cod
 
 ```
 
-### Train the model with Apache Airflow (optional)
+### Train the model with Apache Airflow (optional and only for the final submission not the middle one)
 
 - The version of Apache Airflow used is the 2.1.4 and it is installed with pip. For development it uses SQLite as database but it is not recommended for production. For the laboratory SQLite is sufficient.
 
