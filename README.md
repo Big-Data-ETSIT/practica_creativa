@@ -344,7 +344,24 @@ Vistit http://localhost:8080/home for the web version of Apache Airflow.
 
 
 
+## Evaluation
 
+### First stage
+Evaluation in class where the student/pair hast to show de basic deployment working (only the prediction phase)
+
+### Second stage
+
+One member of the pair must upload the compressed code in a .zip file, **WITHOUT the folders models/, flight_prediction/target, and data/**. Inside the zip file, **a PDF must be included indicating the members of the pair and which parts of the assignment have been completed (not how they were done)**. Maximum length: one page.
+
+Although the submission deadline is January 10th, we recommend finishing it before the written exam, as some questions may be related to the final project. The project will be assessed orally in the following weeks. Time slots will be opened close to the date, and if anyone wishes to do it earlier, they should contact the course coordinator’s email.
+
+Several notes:
+
+1) The project must work correctly; otherwise, it will be graded with a 0. The same applies to each improvement. If an improvement is incomplete, it will be graded with a 0.
+
+2) A minimum grade of 5 out of 10 is required to pass the course.
+
+3) The project and the oral exam can be done in pairs, but the grade will be individual. This means that questions will be asked to both members of the pair, and if they are not answered adequately, the project will not be passed.
 
 
 
